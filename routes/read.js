@@ -25,8 +25,13 @@ module.exports = [{
       // console.log(allBooks);
       // reply(allBooks);
       console.log(allBooks);
-      const sortedJSON = groupByAuthor(allBooks);
-      reply(sortedJSON);
+      if (Object.keys(allBooks).length !== 0){
+        const sortedJSON = groupByAuthor(allBooks);
+        reply(sortedJSON);
+      }
+      else {
+        reply({}); 
+           }
     });
   },
 }];
