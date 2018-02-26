@@ -1,14 +1,12 @@
 const Models = require('../models');
 
-const readHandler = new Promise((resolve) => {
+const readHandler = () => new Promise((resolve) => {
   const PromiseArray = [];
   const returnBookObject = [];
   Models.books.findAll({
     attributes: ['author', 'books_id', 'name', 'rating'],
   }).then((allBooks) => {
-    if (allBooks.length === 0)
-      resolve(0);
-      else {
+    if (allBooks.length === 0) { resolve(0); } else {
       allBooks.map((bookObject) => {
         const currentBookId = bookObject.books_id;
         const promise = Models.likes.findOne({ where: { bookid: currentBookId } });
@@ -21,7 +19,7 @@ const readHandler = new Promise((resolve) => {
         }
         resolve(returnBookObject);
       });
-      }
+    }
   });
 });
 

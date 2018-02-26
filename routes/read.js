@@ -21,17 +21,16 @@ module.exports = [{
   method: 'GET',
   path: '/read',
   handler: (req, reply) => {
-    readHandler.then((allBooks) => {
+    readHandler().then((allBooks) => {
       // console.log(allBooks);
       // reply(allBooks);
       console.log(allBooks);
-      if (Object.keys(allBooks).length !== 0){
+      if (Object.keys(allBooks).length !== 0) {
         const sortedJSON = groupByAuthor(allBooks);
         reply(sortedJSON);
+      } else {
+        reply({});
       }
-      else {
-        reply({}); 
-           }
     });
   },
 }];
